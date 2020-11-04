@@ -1,0 +1,2 @@
+naruto 90 20 14
+sasuke 90 20 12
