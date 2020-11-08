@@ -3,17 +3,20 @@
 
 #include <string>
 
-struct Warrior
+class Warrior
 {
+public:
+    void readFromKeyboard();
+    std::string toString() const;
+    void attack(Warrior &defender) const;
+    bool isAlive() const;
+
+private:
     std::string name;
     int health_points;
     int damage;
     int defense;
+    void die();
 };
-
-Warrior readWarrior();
-void printWarrior(const Warrior &warrior);
-void attack(const Warrior &attacker, Warrior &defender);
-bool isAlive(const Warrior &warrior);
 
 #endif

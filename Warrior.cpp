@@ -2,38 +2,36 @@
 
 #include "Warrior.hpp"
 
-Warrior readWarrior()
+void Warrior::readFromKeyboard()
 {
-    Warrior warrior;
-    std::cin >> warrior.name >> warrior.health_points >> warrior.damage >> warrior.defense;
-    return warrior;
+    std::cin >> name >> health_points >> damage >> defense;
 }
 
-void printWarrior(const Warrior &warrior)
+std::string Warrior::toString() const
 {
-    std::cout << warrior.name << " (HP: " << warrior.health_points << ", DMG: " << warrior.damage << ", DEF: " << warrior.defense << ")";
+    return name + " (HP: " + std::to_string(health_points) + ", DMG: " + std::to_string(damage) + ", DEF: " + std::to_string(defense) + ")";
 }
 
-void die(Warrior &warrior)
+void Warrior::die()
 {
-    warrior.health_points = 0;
-    warrior.damage = 0;
-    warrior.defense = 0;
-    warrior.name += "DEAD";
+    health_points = 0;
+    damage = 0;
+    defense = 0;
+    name += "DEAD";
 }
 
-void attack(const Warrior &attacker, Warrior &defender)
+void Warrior::attack(Warrior &defender) const
 {
-    int actual_damage = attacker.damage - defender.defense;
+    int actual_damage = damage - defender.defense;
     if (actual_damage > 0)
     {
         defender.health_points -= actual_damage;
-        if (!isAlive(defender))
-            die(defender);
+        if (!defender.isAlive())
+            defender.die();
     }
 }
 
-bool isAlive(const Warrior &warrior)
+bool Warrior::isAlive() const
 {
-    return warrior.health_points > 0;
+    return health_points > 0;
 }
