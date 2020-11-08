@@ -1,13 +1,13 @@
 #include <iostream>
+#include <string>
 
 #include "Warrior.hpp"
 #include "Battle.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-    Warrior warrior1, warrior2;
-    warrior1.readFromKeyboard();
-    warrior2.readFromKeyboard();
+    Warrior warrior1(argv[1]);
+    Warrior warrior2(argv[2]);
 
     fightTilDeath(warrior1, warrior2);
 

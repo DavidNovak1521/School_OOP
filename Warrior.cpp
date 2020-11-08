@@ -1,10 +1,23 @@
-#include <iostream>
+#include <fstream>
 
 #include "Warrior.hpp"
 
-void Warrior::readFromKeyboard()
+Warrior::Warrior(const std::string &name, int health_points, int damage, int defense)
 {
-    std::cin >> name >> health_points >> damage >> defense;
+    this->name = name;
+    this->health_points = health_points;
+    this->damage = damage;
+    this->defense = defense;
+}
+
+Warrior::Warrior(const std::string &filename)
+{
+    std::ifstream file(filename);
+    if (file.is_open())
+    {
+        file >> name >> health_points >> damage >> defense;
+        file.close();
+    }
 }
 
 std::string Warrior::toString() const
