@@ -9,14 +9,22 @@ void printStatus(const Warrior &warrior1, const Warrior &warrior2)
 
 void fightTilDeath(Warrior &warrior1, Warrior &warrior2)
 {
-    while (warrior1.isAlive() && warrior2.isAlive())
+    if (warrior1.getTeam() == warrior2.getTeam())
     {
-        printStatus(warrior1, warrior2);
-        warrior1.attack(warrior2);
-        if (warrior2.isAlive())
+        std::cout << "No friendly attack." << std::endl;
+    }
+    else
+    {
+        while (warrior1.isAlive() && warrior2.isAlive())
         {
             printStatus(warrior1, warrior2);
-            warrior2.attack(warrior1);
+            warrior1.attack(warrior2);
+            if (warrior2.isAlive())
+            {
+                printStatus(warrior1, warrior2);
+                warrior2.attack(warrior1);
+            }
         }
+        printStatus(warrior1, warrior2);
     }
 }
