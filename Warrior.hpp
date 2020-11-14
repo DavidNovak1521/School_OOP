@@ -28,6 +28,7 @@ private:
     int health_points;
     int damage;
     int defense;
+
     void die();
 };
 
