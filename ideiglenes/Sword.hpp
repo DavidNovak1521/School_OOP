@@ -2,21 +2,17 @@
 #define SWORD_HPP
 
 #include <string>
+#include "Wearable.hpp"
 
-class Sword
+class Sword : public Wearable
 {
 public:
     Sword(int damage, int durability, double weight);
-    int use();
-    void repair();
-    double getWeight() const;
+    int attack();
     std::string toString() const;
 
 private:
-    int damage;
-    int max_durability;
-    int current_durability;
-    double weight;
+    const int damage;
 };
 
 #endif
