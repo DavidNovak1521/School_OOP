@@ -11,11 +11,15 @@ public:
     };
 
     Inventory();
+    Inventory(const Inventory &) = delete;
+    Inventory &operator=(const Inventory &) = delete;
+    ~Inventory();
     double getTotalWeight() const;
     int count() const;
     Sword &get(int index) const;
     void put(const Sword &sword);
     Sword drop(int index);
+    void clear();
 
 private:
     struct InventoryItem

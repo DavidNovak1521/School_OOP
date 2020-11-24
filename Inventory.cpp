@@ -2,6 +2,8 @@
 
 Inventory::Inventory() : swords(nullptr) {}
 
+Inventory::~Inventory() { clear(); }
+
 double Inventory::getTotalWeight() const
 {
     double totalWeight = 0;
@@ -39,7 +41,9 @@ Sword Inventory::drop(int index)
     for (tmp = &swords; index > 0; --index)
         tmp = &((*tmp)->next);
     Sword toReturn = (*tmp)->sword;
+    InventoryItem *toDelete = (*tmp);
     (*tmp) = (*tmp)->next;
+    delete toDelete;
     return toReturn;
 }
 
@@ -47,4 +51,10 @@ void Inventory::checkIndex(int index) const
 {
     if (index < 0 || index >= count())
         throw WrongIndexException();
+}
+
+void Inventory::clear()
+{
+    while (count() > 0)
+        drop(0);
 }
