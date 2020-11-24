@@ -13,10 +13,10 @@ public:
     std::string toString() const;
 
 private:
-    const int damage;
-    const int max_durability;
+    int damage;
+    int max_durability;
     int current_durability;
-    const double weight;
+    double weight;
 };
 
 #endif

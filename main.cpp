@@ -6,34 +6,31 @@
 #include "FileNotFoundException.hpp"
 #include "Inventory.hpp"
 #include "Belt.hpp"
-#include "List.hpp"
 
 int main(int argc, char **argv)
 {
-    List<HealthPotion> my_hp_list;
+    Inventory inv(6);
+    inv.put(Sword(0, 3, 1.2));
+    inv.put(Sword(1, 3, 3.4));
+    inv.put(Sword(2, 3, 0.3));
+    inv.put(Sword(3, 3, 1.2));
+    inv.put(Sword(4, 3, 3.4));
+    inv.put(Sword(5, 3, 0.3));
 
-    my_hp_list.put(HealthPotion{1});
-    my_hp_list.put(HealthPotion{2});
-    my_hp_list.put(HealthPotion{3});
-    my_hp_list.put(HealthPotion{4});
-    my_hp_list.put(HealthPotion{5});
-    my_hp_list.put(HealthPotion{6});
-    my_hp_list.put(HealthPotion{7});
+    std::cout << "------ INV" << std::endl;
+    for (int i = 0; i < inv.count(); ++i)
+        std::cout << inv.get(i).toString() << std::endl;
 
-    try
-    {
-        while (true)
-        {
-            for (int i = 0; i < my_hp_list.count(); i++)
-                std::cout << i << ". potion: " << my_hp_list.get(i).health_points << std::endl;
-            std::cout << std::endl;
-            my_hp_list.pop(3);
-        }
-    }
-    catch (WrongIndexException e)
-    {
-        std::cout << "Could not access element at index: " << e.index << "\n";
-    }
+    Inventory inv2(inv);
+    inv.clear();
+
+    std::cout << "------ INV" << std::endl;
+    for (int i = 0; i < inv.count(); ++i)
+        std::cout << inv.get(i).toString() << std::endl;
+
+    std::cout << "------ INV2" << std::endl;
+    for (int i = 0; i < inv2.count(); ++i)
+        std::cout << inv2.get(i).toString() << std::endl;
 
     return 0;
 }

@@ -1,36 +1,27 @@
 #ifndef INVENTORY_HPP
 #define INVENTORY_HPP
 
+#include <vector>
 #include "Sword.hpp"
 
 class Inventory
 {
 public:
-    struct WrongIndexException
-    {
-    };
+    Inventory(double weightLimit);
 
-    Inventory();
-    Inventory(const Inventory &) = delete;
-    Inventory &operator=(const Inventory &) = delete;
-    ~Inventory();
+    //Inventory(const Inventory &) = delete;
+    //Inventory &operator=(const Inventory &) = delete;
+
     double getTotalWeight() const;
     int count() const;
-    Sword &get(int index) const;
-    void put(const Sword &sword);
+    const Sword &get(int index) const;
+    bool put(const Sword &sword);
     Sword drop(int index);
     void clear();
 
 private:
-    struct InventoryItem
-    {
-        Sword sword;
-        InventoryItem *next;
-    };
-
-    InventoryItem *swords;
-
-    void checkIndex(int index) const;
+    std::vector<Sword> swords;
+    double weightLimit;
 };
 
 #endif
