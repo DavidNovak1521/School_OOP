@@ -9,7 +9,7 @@ class Shield : public Wearable
 public:
     Shield(int defense, int durability, double weight);
     int defend();
-    std::string toString() const;
+    std::string toString() const override;
 
 private:
     const int defense;

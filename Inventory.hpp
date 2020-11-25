@@ -2,26 +2,29 @@
 #define INVENTORY_HPP
 
 #include <vector>
-#include "Sword.hpp"
+#include "Item.hpp"
+#include "Shield.hpp"
 
 class Inventory
 {
 public:
     Inventory(double weightLimit);
+    ~Inventory();
 
-    //Inventory(const Inventory &) = delete;
-    //Inventory &operator=(const Inventory &) = delete;
+    Inventory(const Inventory &) = delete;
+    Inventory &operator=(const Inventory &) = delete;
 
     double getTotalWeight() const;
     int count() const;
-    const Sword &get(int index) const;
-    bool put(const Sword &sword);
-    Sword drop(int index);
+    const Item &get(int index) const;
+    bool put(Item *item);
+    Item *drop(int index);
+    void destroy(int index);
     void clear();
 
 private:
-    std::vector<Sword> swords;
-    double weightLimit;
+    std::vector<Item *> items;
+    const double weightLimit;
 };
 
 #endif

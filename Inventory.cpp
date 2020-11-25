@@ -2,43 +2,54 @@
 
 Inventory::Inventory(double weightLimit) : weightLimit(weightLimit) {}
 
+Inventory::~Inventory() { clear(); }
+
 double Inventory::getTotalWeight() const
 {
     double totalWeight = 0;
-    for (auto &sword : swords)
-        totalWeight += sword.getWeight();
+    for (auto &item : items)
+        totalWeight += item->getWeight();
     return totalWeight;
 }
 
 int Inventory::count() const
 {
-    return swords.size();
+    return items.size();
 }
 
-const Sword &Inventory::get(int index) const
+const Item &Inventory::get(int index) const
 {
-    return swords.at(index);
+    return *items.at(index);
 }
 
-bool Inventory::put(const Sword &sword)
+bool Inventory::put(Item *item)
 {
-    if (getTotalWeight() + sword.getWeight() > weightLimit)
+    if (getTotalWeight() + item->getWeight() > weightLimit)
         return false;
     else
     {
-        swords.push_back(sword);
+        items.push_back(item);
         return true;
     }
 }
 
-Sword Inventory::drop(int index)
+Item *Inventory::drop(int index)
 {
-    Sword sword(swords.at(index));
-    swords.erase(swords.begin() + index);
-    return sword;
+    Item *item = items.at(index);
+    items.erase(items.begin() + index);
+    return item;
+}
+
+void Inventory::destroy(int index)
+{
+    Item *item = items.at(index);
+    items.erase(items.begin() + index);
+    delete item;
 }
 
 void Inventory::clear()
 {
-    swords.clear();
+    for (auto pItem : items)
+        delete pItem;
+    items.clear();
 }
