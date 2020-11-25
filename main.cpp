@@ -7,6 +7,7 @@
 #include "Inventory.hpp"
 #include "Belt.hpp"
 #include "Sword.hpp"
+#include "Shield.hpp"
 #include "SpellBook.hpp"
 
 int main(int argc, char **argv)
@@ -19,6 +20,12 @@ int main(int argc, char **argv)
 
     for (int i = 0; i < inv.count(); i++)
         std::cout << inv.get(i).toString() << std::endl;
+
+    std::cout << "Total weight: " << inv.getTotalWeight()
+              << "\n - Wearables: " << inv.getWeight<Wearable>()
+              << "\n   - Sword w.: " << inv.getWeight<Sword>()
+              << "\n   - Shield w.: " << inv.getWeight<Shield>()
+              << "\n - SpellScroll w.: " << inv.getWeight<SpellScroll>() << std::endl;
 
     return 0;
 }

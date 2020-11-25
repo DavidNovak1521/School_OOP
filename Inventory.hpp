@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Item.hpp"
-#include "Shield.hpp"
 
 class Inventory
 {
@@ -15,6 +14,18 @@ public:
     Inventory &operator=(const Inventory &) = delete;
 
     double getTotalWeight() const;
+    template <typename T>
+    double getWeight() const
+    {
+        double totalWeight = 0;
+        for (auto item : items)
+        {
+            T *pT = dynamic_cast<T *>(item);
+            if (pT != nullptr)
+                totalWeight += pT->getWeight();
+        }
+        return totalWeight;
+    }
     int count() const;
     const Item &get(int index) const;
     bool put(Item *item);
