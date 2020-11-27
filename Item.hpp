@@ -4,7 +4,7 @@
 #include <string>
 #include "Printable.hpp"
 
-class Item : Printable
+class Item : public Printable
 {
 public:
     Item(double weight) : weight(weight) {}

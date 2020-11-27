@@ -9,6 +9,13 @@ public:
     void repair();
     bool isUsable() const;
     void use();
+    Wearable &operator+=(int repair)
+    {
+        current_durability += repair;
+        if (current_durability > max_durability)
+            current_durability = max_durability;
+        return *this;
+    }
 
 protected:
     Wearable(int max_durability, double weight);

@@ -41,7 +41,8 @@
         "cctype": "cpp",
         "string": "cpp",
         "fstream": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "algorithm": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

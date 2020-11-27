@@ -9,6 +9,7 @@
 #include "Sword.hpp"
 #include "Shield.hpp"
 #include "SpellBook.hpp"
+#include "Printable.hpp"
 
 int main(int argc, char **argv)
 {
@@ -18,8 +19,16 @@ int main(int argc, char **argv)
     inv.put(new SpellScroll());
     inv.put(new Shield(12, 6, 5.5));
 
+    auto book = new SpellBook(5);
+    *book << "Varazslat1"
+          << "Varazslat2";
+    "Varazslat3" >> *book;
+    inv.put(book);
+
     for (int i = 0; i < inv.count(); i++)
-        std::cout << inv.get(i).toString() << std::endl;
+    {
+        std::cout << "Item " << i << ": " << inv.get(i) << std::endl;
+    }
 
     std::cout << "Total weight: " << inv.getTotalWeight()
               << "\n - Wearables: " << inv.getWeight<Wearable>()
